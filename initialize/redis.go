@@ -4,7 +4,7 @@ import (
 	"go-gin/global"
 	"os"
 
-	"github.com/go-redis/redis/v8"
+	"github.com/go-redis/redis"
 )
 
 func Redis() {
