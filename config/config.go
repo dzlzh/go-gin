@@ -10,7 +10,8 @@ type Service struct {
 type System struct {
 	Name            string `mapstructure:"name"`
 	Url             string `mapstructure:"url"`
-	Addr            string `mapstructure:"addr"`
+	Addr            int    `mapstructure:"addr"`
+	Tls             bool   `mapstructure:"tls"`
 	Env             string `mapstructure:"env"`
 	Debug           bool   `mapstructure:"debug"`
 	RuntimeRootPath string `mapstructure:"runtime-root-path"`
