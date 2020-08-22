@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-gin/bootstrap"
 	"go-gin/global"
 	"go-gin/initialize"
 )
@@ -13,4 +14,6 @@ func main() {
 	defer global.GVA_DB.Close()
 	// 初始化 Redis
 	initialize.Redis()
+
+	bootstrap.Run()
 }
