@@ -15,6 +15,10 @@ func Routers() *gin.Engine {
 	}
 	r := gin.Default()
 	global.GVA_LOG.Debug("use middleware Logger and Recovery")
+	if global.GVA_CONFIG.System.Tls {
+		r.Use(middleware.Tls())
+		global.GVA_LOG.Debug("use middleware Tls")
+	}
 
 	return r
 }
