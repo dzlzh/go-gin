@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
+	// 初始化 Log
+	initialize.Log()
 	// 初始化 Mysql
 	initialize.Mysql()
 	defer global.GVA_DB.Close()
