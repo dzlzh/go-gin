@@ -1,41 +1,41 @@
 package config
 
 type Service struct {
-	System System `yaml:"system"`
-	Log    Log    `yaml:"log"`
-	Mysql  Mysql  `yaml:"mysql"`
-	Redis  Redis  `yaml:"redis"`
+	System System `mapstructure:"system"`
+	Log    Log    `mapstructure:"log"`
+	Mysql  Mysql  `mapstructure:"mysql"`
+	Redis  Redis  `mapstructure:"redis"`
 }
 
 type System struct {
-	Name  string `yaml:"name"`
-	Url   string `yaml:"url"`
-	Addr  string `yaml:"addr"`
-	Env   string `yaml:"env"`
-	Debug bool   `yaml:"debug"`
+	Name            string `mapstructure:"name"`
+	Url             string `mapstructure:"url"`
+	Addr            string `mapstructure:"addr"`
+	Env             string `mapstructure:"env"`
+	Debug           bool   `mapstructure:"debug"`
+	RuntimeRootPath string `mapstructure:"runtime-root-path"`
 }
 
 type Log struct {
-	Prefix  string `yaml:"prefix"`
-	LogFile bool   `yaml:"log-file"`
-	Stdout  string `yaml:"stdout"`
-	File    string `yaml:"file"`
+	Prefix string `mapstructure:"prefix"`
+	Level  string `mapstructure:"level"`
+	Path   string `mapstructure:"path"`
 }
 
 type Mysql struct {
-	Username     string `yaml:"username"`
-	Password     string `yaml:"password"`
-	Addr         string `yaml:"addr"`
-	Database     string `yaml:"database"`
-	Config       string `yaml:"config"`
-	MaxIdleConns int    `yaml:"max-idle-conns"`
-	MaxOpenConns int    `yaml:"max-open-conns"`
-	LogMode      bool   `yaml:"log-mode"`
-	Prefix       string `yaml:"prefix"`
+	Username     string `mapstructure:"username"`
+	Password     string `mapstructure:"password"`
+	Addr         string `mapstructure:"addr"`
+	Database     string `mapstructure:"database"`
+	Config       string `mapstructure:"config"`
+	MaxIdleConns int    `mapstructure:"max-idle-conns"`
+	MaxOpenConns int    `mapstructure:"max-open-conns"`
+	LogMode      bool   `mapstructure:"log-mode"`
+	Prefix       string `mapstructure:"prefix"`
 }
 
 type Redis struct {
-	Addr     string `yaml:"addr"`
-	Password string `yaml:"password"`
-	DB       int    `yaml:"db"`
+	Addr     string `mapstructure:"addr"`
+	Password string `mapstructure:"password"`
+	DB       int    `mapstructure:"db"`
 }
