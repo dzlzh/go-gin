@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-redis/redis"
 	"github.com/jinzhu/gorm"
-	oplogging "github.com/op/go-logging"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
@@ -14,5 +14,5 @@ var (
 	GVA_REDIS  *redis.Client
 	GVA_CONFIG config.Service
 	GVA_VP     *viper.Viper
-	GVA_LOG    *oplogging.Logger
+	GVA_LOG    *logrus.Logger
 )
