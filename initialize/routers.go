@@ -19,6 +19,8 @@ func Routers() *gin.Engine {
 		r.Use(middleware.Tls())
 		global.GVA_LOG.Debug("use middleware Tls")
 	}
+	r.Use(middleware.Cors())
+	global.GVA_LOG.Debug("use middleware Cors")
 
 	return r
 }
