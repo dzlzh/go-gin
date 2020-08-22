@@ -6,6 +6,9 @@ import (
 )
 
 func main() {
+	// 初始化 Mysql
 	initialize.Mysql()
 	defer global.GVA_DB.Close()
+	// 初始化 Redis
+	initialize.Redis()
 }
