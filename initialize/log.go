@@ -39,7 +39,7 @@ func writer(logPath string, level string) *rotatelogs.RotateLogs {
 	fileSuffix := time.Now().Format("20060102")
 
 	writer, err := rotatelogs.New(
-		logFullPath+"-"+fileSuffix,
+		logFullPath+"."+fileSuffix+".log",
 		rotatelogs.WithLinkName(logFullPath),      // 生成软链，指向最新日志文件
 		rotatelogs.WithMaxAge(7*24*time.Hour),     // 文件最大保存时间
 		rotatelogs.WithRotationTime(24*time.Hour), // 日志切割时间间隔

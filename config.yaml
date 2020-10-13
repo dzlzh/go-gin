@@ -8,7 +8,6 @@ system:
   runtime-root-path: 'runtime/'
 
 log:
-  prefix: '[GO-GIN]'
   level: 'debug'
   path: 'runtime/logs/'
 

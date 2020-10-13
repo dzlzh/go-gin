@@ -18,9 +18,8 @@ type System struct {
 }
 
 type Log struct {
-	Prefix string `mapstructure:"prefix"`
-	Level  string `mapstructure:"level"`
-	Path   string `mapstructure:"path"`
+	Level string `mapstructure:"level"`
+	Path  string `mapstructure:"path"`
 }
 
 type Mysql struct {
