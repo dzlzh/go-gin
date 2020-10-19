@@ -1,8 +1,9 @@
 package main
 
 import (
-	"go-gin/bootstrap"
+	"go-gin/cmd"
 	"go-gin/initialize"
+	"os"
 )
 
 func main() {
@@ -14,5 +15,8 @@ func main() {
 	// 初始化 Redis
 	initialize.Redis()
 
-	bootstrap.Run()
+	err := cmd.Execute()
+	if err != nil {
+		os.Exit(0)
+	}
 }

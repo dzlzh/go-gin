@@ -37,7 +37,6 @@ func Mysql() {
 		global.GVA_LOG.Error("MySQL启动失败", err)
 		os.Exit(0)
 	} else {
-		AuthManager()
 		sqlDB, _ := global.GVA_DB.DB()
 		sqlDB.SetMaxIdleConns(conf.MaxIdleConns)
 		sqlDB.SetMaxOpenConns(conf.MaxOpenConns)
