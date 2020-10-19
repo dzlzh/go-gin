@@ -37,6 +37,7 @@ func Mysql() {
 		global.GVA_LOG.Error("MySQL启动失败", err)
 		os.Exit(0)
 	} else {
+		AuthManager()
 		sqlDB, _ := global.GVA_DB.DB()
 		sqlDB.SetMaxIdleConns(conf.MaxIdleConns)
 		sqlDB.SetMaxOpenConns(conf.MaxOpenConns)
@@ -46,4 +47,13 @@ func Mysql() {
 func MysqlClose() {
 	db, _ := global.GVA_DB.DB()
 	db.Close()
+}
+
+func AutoMigrate() {
+	err := global.GVA_DB.AutoMigrate()
+	if err != nil {
+		global.GVA_LOG.Error("MySQL 迁移失败", err)
+		os.Exit(0)
+	}
+	global.GVA_LOG.Info("MySQL 迁移成功")
 }
