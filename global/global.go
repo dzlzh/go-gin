@@ -4,9 +4,9 @@ import (
 	"go-gin/config"
 
 	"github.com/go-redis/redis"
-	"github.com/jinzhu/gorm"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"gorm.io/gorm"
 )
 
 var (

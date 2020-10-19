@@ -11,7 +11,10 @@ func main() {
 	initialize.Log()
 	// 初始化 Mysql
 	initialize.Mysql()
-	defer global.GVA_DB.Close()
+	defer func() {
+		db, _ := global.GVA_DB.DB()
+		db.Close()
+	}()
 	// 初始化 Redis
 	initialize.Redis()
 

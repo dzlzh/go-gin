@@ -4,24 +4,41 @@ import (
 	"go-gin/global"
 	"os"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
+	"gorm.io/gorm/schema"
 )
 
 func Mysql() {
+	var err error
 	conf := global.GVA_CONFIG.Mysql
-	if db, err := gorm.Open("mysql", conf.Username+":"+conf.Password+"@("+conf.Addr+")/"+conf.Database+"?"+conf.Config); err != nil {
+	dsn := conf.Username + ":" + conf.Password + "@(" + conf.Addr + ")/" + conf.Database + "?" + conf.Config
+	mysqlConfig := mysql.Config{
+		DSN:                       dsn,
+		DefaultStringSize:         191,
+		DisableDatetimePrecision:  true,
+		DontSupportRenameIndex:    true,
+		DontSupportRenameColumn:   true,
+		SkipInitializeWithVersion: false,
+	}
+	logMode := logger.Silent
+	if conf.LogMode {
+		logMode = logger.Info
+	}
+	gormConfig := &gorm.Config{
+		Logger:                                   logger.Default.LogMode(logMode),
+		DisableForeignKeyConstraintWhenMigrating: true,
+		NamingStrategy: schema.NamingStrategy{
+			TablePrefix: conf.Prefix,
+		},
+	}
+	if global.GVA_DB, err = gorm.Open(mysql.New(mysqlConfig), gormConfig); err != nil {
 		global.GVA_LOG.Error("MySQL启动失败", err)
 		os.Exit(0)
 	} else {
-		global.GVA_DB = db
-		global.GVA_DB.DB().SetMaxIdleConns(conf.MaxIdleConns)
-		global.GVA_DB.DB().SetMaxOpenConns(conf.MaxOpenConns)
-		global.GVA_DB.LogMode(conf.LogMode)
-		if conf.Prefix != "" {
-			gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-				return conf.Prefix + defaultTableName
-			}
-		}
+		sqlDB, _ := global.GVA_DB.DB()
+		sqlDB.SetMaxIdleConns(conf.MaxIdleConns)
+		sqlDB.SetMaxOpenConns(conf.MaxOpenConns)
 	}
 }

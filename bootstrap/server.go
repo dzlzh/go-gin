@@ -22,7 +22,7 @@ func Run() {
 	address := fmt.Sprintf(":%d", global.GVA_CONFIG.System.Addr)
 	s := initServer(address, router)
 	global.GVA_LOG.Debug("server run success on ", address)
-	global.GVA_LOG.Error(s.ListenAndServe())
+	global.GVA_LOG.Error(s.ListenAndServe().Error())
 }
 
 func initServer(address string, router *gin.Engine) server {
