@@ -42,3 +42,8 @@ func Mysql() {
 		sqlDB.SetMaxOpenConns(conf.MaxOpenConns)
 	}
 }
+
+func MysqlClose() {
+	db, _ := global.GVA_DB.DB()
+	db.Close()
+}

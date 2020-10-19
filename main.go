@@ -2,7 +2,6 @@ package main
 
 import (
 	"go-gin/bootstrap"
-	"go-gin/global"
 	"go-gin/initialize"
 )
 
@@ -11,10 +10,7 @@ func main() {
 	initialize.Log()
 	// 初始化 Mysql
 	initialize.Mysql()
-	defer func() {
-		db, _ := global.GVA_DB.DB()
-		db.Close()
-	}()
+	defer initialize.MysqlClose()
 	// 初始化 Redis
 	initialize.Redis()
 
