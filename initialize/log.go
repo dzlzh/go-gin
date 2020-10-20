@@ -25,6 +25,10 @@ func init() {
 	global.GVA_LOG.SetLevel(loglevel)
 
 	// global.GVA_LOG.SetFormatter(&MineFormatter{})
+	global.GVA_LOG.SetFormatter(&logrus.TextFormatter{
+		DisableLevelTruncation: true,
+		FullTimestamp:          true,
+	})
 
 	// 为不同级别设置不同的输出目的
 	lfHook := lfshook.NewHook(lfshook.WriterMap{
