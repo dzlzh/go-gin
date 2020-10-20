@@ -12,7 +12,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func Log() {
+func init() {
 	conf := global.GVA_CONFIG.Log
 	global.GVA_LOG = logrus.New()
 

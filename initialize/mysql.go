@@ -2,7 +2,6 @@ package initialize
 
 import (
 	"go-gin/global"
-	"os"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -35,7 +34,7 @@ func Mysql() {
 	}
 	if global.GVA_DB, err = gorm.Open(mysql.New(mysqlConfig), gormConfig); err != nil {
 		global.GVA_LOG.Error("MySQL启动失败", err)
-		os.Exit(0)
+		panic(err)
 	} else {
 		AutoMigrate()
 		sqlDB, _ := global.GVA_DB.DB()
@@ -53,7 +52,6 @@ func AutoMigrate() {
 	err := global.GVA_DB.AutoMigrate()
 	if err != nil {
 		global.GVA_LOG.Error("MySQL 迁移失败", err)
-		os.Exit(0)
 	}
 	global.GVA_LOG.Info("MySQL 迁移成功")
 }

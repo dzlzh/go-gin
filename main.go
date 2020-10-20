@@ -3,12 +3,9 @@ package main
 import (
 	"go-gin/cmd"
 	"go-gin/initialize"
-	"os"
 )
 
 func main() {
-	// 初始化 Log
-	initialize.Log()
 	// 初始化 Mysql
 	initialize.Mysql()
 	defer initialize.MysqlClose()
@@ -17,6 +14,6 @@ func main() {
 
 	err := cmd.Execute()
 	if err != nil {
-		os.Exit(0)
+		panic(err)
 	}
 }
