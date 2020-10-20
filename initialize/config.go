@@ -3,6 +3,7 @@ package initialize
 import (
 	"fmt"
 	"go-gin/global"
+	"os"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
@@ -29,4 +30,5 @@ func init() {
 		fmt.Println(err)
 	}
 	global.GVA_VP = v
+	os.MkdirAll(global.GVA_CONFIG.System.RuntimeRootPath, os.ModePerm)
 }

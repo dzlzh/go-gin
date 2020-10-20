@@ -3,6 +3,7 @@ package initialize
 import (
 	"fmt"
 	"go-gin/global"
+	"os"
 	"path"
 	"strings"
 	"time"
@@ -14,6 +15,9 @@ import (
 
 func init() {
 	conf := global.GVA_CONFIG.Log
+
+	os.MkdirAll(conf.Path, os.ModePerm)
+
 	global.GVA_LOG = logrus.New()
 
 	var loglevel logrus.Level
