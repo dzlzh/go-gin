@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	rotatelogs "github.com/lestrrat/go-file-rotatelogs"
+	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
 )
@@ -54,6 +54,11 @@ func writer(logPath string, level string) *rotatelogs.RotateLogs {
 type MineFormatter struct{}
 
 func (s *MineFormatter) Format(entry *logrus.Entry) ([]byte, error) {
-	msg := fmt.Sprintf("[%s] [%s] %s\n", time.Now().Format("2006-01-02 15:04:05"), strings.ToUpper(entry.Level.String()), entry.Message)
+	msg := fmt.Sprintf(
+		"[%s] [%s] %s\n",
+		time.Now().Format("2006-01-02 15:04:05"),
+		strings.ToUpper(entry.Level.String()),
+		entry.Message,
+	)
 	return []byte(msg), nil
 }
