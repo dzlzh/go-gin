@@ -18,7 +18,7 @@ func Redis() {
 		global.GVA_LOG.Error("Redis启动失败", err)
 		panic(err)
 	} else {
-		global.GVA_LOG.Info("redis connect ping response:", pong)
+		global.GVA_LOG.Info("Redis Ping :", pong)
 		global.GVA_REDIS = client
 	}
 }
