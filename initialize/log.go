@@ -24,6 +24,8 @@ func init() {
 	loglevel.UnmarshalText([]byte(conf.Level))
 	global.GVA_LOG.SetLevel(loglevel)
 
+	// global.GVA_LOG.SetFormatter(&MineFormatter{})
+
 	// 为不同级别设置不同的输出目的
 	lfHook := lfshook.NewHook(lfshook.WriterMap{
 		logrus.DebugLevel: writer(conf.Path, "debug"),
