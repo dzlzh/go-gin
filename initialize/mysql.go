@@ -12,7 +12,7 @@ import (
 func Mysql() {
 	var err error
 	conf := global.GVA_CONFIG.Mysql
-	dsn := conf.Username + ":" + conf.Password + "@(" + conf.Addr + ")/" + conf.Database + "?" + conf.Config
+	dsn := conf.Username + ":" + conf.Password + "@tcp(" + conf.Addr + ")/" + conf.Database + "?" + conf.Config
 	mysqlConfig := mysql.Config{
 		DSN:                       dsn,
 		DefaultStringSize:         191,
