@@ -4,12 +4,13 @@ import (
 	"go-gin/global"
 
 	"github.com/robfig/cron/v3"
+	"go.uber.org/zap"
 )
 
 func Cron() {
 	c := cron.New(
 		cron.WithSeconds(),
-		cron.WithLogger(cron.VerbosePrintfLogger(global.GVA_LOG)),
+		cron.WithLogger(cron.VerbosePrintfLogger(zap.NewStdLog(global.GVA_ZAP))),
 		cron.WithChain(cron.Recover(cron.DefaultLogger)),
 	)
 
