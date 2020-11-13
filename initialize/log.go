@@ -71,17 +71,27 @@ func getEncoderCore() (core zapcore.Core) {
 		fmt.Printf("Get Write Syncer Failed err:%v", err.Error())
 		return
 	}
-	return zapcore.NewCore(zapcore.NewJSONEncoder(getEncoderConfig()), writer, level)
+	return zapcore.NewCore(
+		zapcore.NewJSONEncoder(getEncoderConfig()),
+		writer,
+		level,
+	)
 }
 
 func writeSyncer() (zapcore.WriteSyncer, error) {
-	os.MkdirAll(global.GVA_CONFIG.Log.Path, os.ModePerm)
-	logFullPath := path.Join(global.GVA_CONFIG.Log.Path, "log")
+	logFullPath := path.Join(
+		global.GVA_CONFIG.System.RuntimeRootPath,
+		global.GVA_CONFIG.Log.Dir,
+		global.GVA_CONFIG.Log.FileName,
+	)
 	writer, err := rotatelogs.New(
-		logFullPath+"."+"%Y%m%d.log",
+		logFullPath+"-"+"%Y%m%d.log",
 		rotatelogs.WithLinkName(logFullPath),      // 生成软链，指向最新日志文件
 		rotatelogs.WithMaxAge(7*24*time.Hour),     // 文件最大保存时间
 		rotatelogs.WithRotationTime(24*time.Hour), // 日志切割时间间隔
 	)
-	return zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), zapcore.AddSync(writer)), err
+	return zapcore.NewMultiWriteSyncer(
+		zapcore.AddSync(os.Stdout),
+		zapcore.AddSync(writer),
+	), err
 }

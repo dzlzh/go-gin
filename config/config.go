@@ -18,8 +18,9 @@ type System struct {
 }
 
 type Log struct {
-	Level string `mapstructure:"level"`
-	Path  string `mapstructure:"path"`
+	Level    string `mapstructure:"level"`
+	Dir      string `mapstructure:"dir"`
+	FileName string `mapstructure:"file-name"`
 }
 
 type Mysql struct {
